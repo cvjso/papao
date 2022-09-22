@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=2]
-
-[ext_resource path="res://sprites/empty.png" type="Texture" id=1]
-
-[node name="empty tile" type="Node2D"]
-
-[node name="Empty" type="Sprite" parent="."]
-texture = ExtResource( 1 )

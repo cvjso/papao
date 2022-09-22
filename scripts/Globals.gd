@@ -3,7 +3,7 @@ extends Node
 var camera := Camera2D.new()
 export var zoom_value = 1.0
 export var speed = 10
-export var offset = Vector2(0,100)
+export var offset = Vector2(0,50)
 
 func _ready():
 	get_tree().current_scene.add_child(camera)
@@ -40,8 +40,13 @@ func handle_zoom(event):
 	if event.is_action_pressed("up"):
 		zoom_out()
 
+func handle_quit(event):
+	if event.is_action_pressed("exit"):
+		get_tree().quit()
+
 func _input(event):
 	handle_move(event)
 	handle_zoom(event)
+	handle_quit(event)
 	
 	
