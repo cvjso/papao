@@ -1,9 +1,26 @@
+tool
 extends Node
 
+# camera
 var camera := Camera2D.new()
-export var zoom_value = 1.0
-export var speed = 10
-export var offset = Vector2(0,50)
+var zoom_value = 1.0
+var speed = 10
+var offset = Vector2(0,50)
+
+# map
+var matrix := []
+var player_pos = Vector2(0,0)
+var map
+var player
+
+func move_player(pos:Vector2):
+	map = get_tree().current_scene.find_node("map")
+	var n_pos = map.get_node("TileMap").world_to_map(pos)
+	if n_pos.x < len(matrix) and n_pos.x >= 0 and n_pos.y >= 0 and n_pos.y < len(matrix):
+		player = get_tree().current_scene.find_node("player")
+		player.move_player(pos)
+		return true
+	return false
 
 func _ready():
 	get_tree().current_scene.add_child(camera)

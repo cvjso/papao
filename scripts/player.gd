@@ -15,6 +15,10 @@ var area_on = false
 func _ready():
 	pass
 
+func move_player(pos:Vector2):
+	position = pos
+	clean_area()
+
 func add_area(pos:Vector2, target:Node2D):
 	var area_inst = area_node.instance()
 	target.add_child(area_inst)
@@ -23,12 +27,14 @@ func add_area(pos:Vector2, target:Node2D):
 		area_inst.show_behind_parent = true
 
 func clean_area():
+	area_on = false
 	while p_sprite.get_child_count() > 0:
 		var n = p_sprite.get_child(0)
 		p_sprite.remove_child(n)
 		n.queue_free()
 
 func show_area():
+	area_on = true
 	var distance = 1
 	var area_target = Node2D.new()
 	clean_area()
@@ -50,8 +56,6 @@ func _on_Area2D_mouse_exited():
 
 func _input(event):
 	if event.is_action_pressed("click") and area_on:
-		area_on = false
 		clean_area()
 	elif event.is_action_pressed("click") and mouse_on and not area_on:
-		area_on = true
 		show_area()
