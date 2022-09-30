@@ -13,11 +13,38 @@ var player_pos = Vector2(0,0)
 var map
 var player
 
+func is_tile_available(pos:Vector2):
+	return !matrix[pos.x][pos.y] == 2
+
+func is_path_available(start:Vector2, end:Vector2):
+	var x_diff = end.x - start.x
+	var y_diff = end.y - start.y
+	
+	while(x_diff != 0):
+		if !is_tile_available(Vector2(start.x + x_diff, start.y)):
+			return false
+		if x_diff < 0:
+			x_diff += 1
+		if x_diff > 0:
+			x_diff -= 1
+	
+	while(y_diff != 0):
+		if !is_tile_available(Vector2(start.x, start.y + y_diff)):
+			return false
+		if y_diff < 0:
+			y_diff += 1
+		if y_diff > 0:
+			y_diff -= 1
+	
+	return true
+
 func move_player(pos:Vector2):
 	map = get_tree().current_scene.find_node("map")
 	var n_pos = map.get_node("TileMap").world_to_map(pos)
-	if n_pos.x < len(matrix) and n_pos.x >= 0 and n_pos.y >= 0 and n_pos.y < len(matrix):
-		player = get_tree().current_scene.find_node("player")
+	var p_pos = map.get_node("TileMap").world_to_map(player.global_position)
+	if n_pos.x < len(matrix) and n_pos.x >= 0 and n_pos.y >= 0 and n_pos.y < len(matrix) and is_path_available(p_pos, n_pos):
+		
+		#player = get_tree().current_scene.find_node("player")
 		player.move_player(pos)
 		return true
 	return false

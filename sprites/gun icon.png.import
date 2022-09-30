@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/tiles grama.png-d708996b00a94372ae9f3b20946b5f85.stex"
+path="res://.import/gun icon.png-759d91c1b0caad6abe86dbf8b4977428.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/tiles grama.png"
-dest_files=[ "res://.import/tiles grama.png-d708996b00a94372ae9f3b20946b5f85.stex" ]
+source_file="res://sprites/gun icon.png"
+dest_files=[ "res://.import/gun icon.png-759d91c1b0caad6abe86dbf8b4977428.stex" ]
 
 [params]
 

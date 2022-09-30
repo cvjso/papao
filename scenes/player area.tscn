@@ -14,5 +14,8 @@ texture = ExtResource( 1 )
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="Area2D"]
 polygon = PoolVector2Array( 0, 8, 8, 4, 0, -1, -8, 4 )
 
+[node name="Light2D" type="Light2D" parent="."]
+texture = ExtResource( 1 )
+
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_Area2D_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_Area2D_mouse_exited"]

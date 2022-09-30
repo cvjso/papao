@@ -5,7 +5,7 @@ export(int) var grid_size = 0
 
 onready var tilemap = $TileMap
 
-var proportion = [2,8]
+export(Array, int) var proportion = [7,2,1]
 var trunk = []
 
 func _ready():
@@ -22,16 +22,16 @@ func populate():
 func render_world():
 	tilemap.clear()
 	var prop = proportion.duplicate()
-	for i in range(2):
+	for i in range(len(proportion)):
 		var s = grid_size * grid_size * prop[i]
 		prop[i] = round(s / 10.0)
 	for i in range(grid_size):
 		Globals.matrix.append([])
 		for j in range(grid_size):
-			var tile = randi() % 2
+			var tile = randi() % len(proportion)
 			if prop[tile] == 0:
 				while prop[tile] == 0:
-					tile = randi() % 2
+					tile = randi() % len(proportion)
 			trunk.append(tile)
 			prop[tile] -= 1
 	trunk.shuffle()

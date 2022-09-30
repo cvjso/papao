@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/area.png-0c41bd4a140d931a1e3b7ec7bbcdc261.stex"
+path="res://.import/gan.png-81876f60949788d71dc423ad91dbaee8.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/area.png"
-dest_files=[ "res://.import/area.png-0c41bd4a140d931a1e3b7ec7bbcdc261.stex" ]
+source_file="res://sprites/gan.png"
+dest_files=[ "res://.import/gan.png-81876f60949788d71dc423ad91dbaee8.stex" ]
 
 [params]
 

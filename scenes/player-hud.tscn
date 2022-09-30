@@ -1,0 +1,100 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://sprites/char pict.png" type="Texture" id=1]
+[ext_resource path="res://sprites/lain pfp.jpg" type="Texture" id=2]
+[ext_resource path="res://scenes/hud theme.tres" type="Theme" id=3]
+[ext_resource path="res://sprites/hud stats.png" type="Texture" id=4]
+[ext_resource path="res://sprites/none icon.png" type="Texture" id=5]
+
+[node name="player-hud" type="Control"]
+anchor_right = 0.273
+anchor_bottom = 0.18
+margin_right = 0.112
+rect_min_size = Vector2( 70, 27 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_right = 0.429
+anchor_bottom = 1.0
+margin_right = -0.0300007
+margin_bottom = 3.0
+texture = ExtResource( 1 )
+expand = true
+
+[node name="TextureRect" type="TextureRect" parent="TextureRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 3.0
+margin_top = 3.0
+margin_right = -3.0
+margin_bottom = -3.0
+texture = ExtResource( 2 )
+expand = true
+
+[node name="stats" type="TextureRect" parent="."]
+anchor_left = 0.443
+anchor_right = 1.014
+anchor_bottom = 1.074
+margin_left = -0.0100021
+margin_top = 1.0
+margin_right = 0.0199966
+margin_bottom = 1.002
+texture = ExtResource( 4 )
+expand = true
+
+[node name="values" type="Label" parent="stats"]
+anchor_left = 0.025
+anchor_right = 0.635
+anchor_bottom = 0.731
+margin_right = 36.6
+margin_bottom = 31.763
+rect_scale = Vector2( 0.4, 0.4 )
+theme = ExtResource( 3 )
+text = "HP: 3/3
+SP: 3/3
+VR: 2"
+
+[node name="weapon" type="TextureRect" parent="stats"]
+modulate = Color( 0.615686, 0.615686, 0.615686, 1 )
+anchor_left = 0.25
+anchor_top = 0.724
+anchor_right = 0.425
+anchor_bottom = 0.931
+margin_top = 0.00399971
+margin_bottom = 0.000997543
+texture = ExtResource( 5 )
+expand = true
+
+[node name="info" type="Label" parent="stats/weapon"]
+anchor_left = 0.025
+anchor_right = 1.0
+anchor_bottom = 1.614
+margin_left = 5.825
+margin_top = 4.0
+margin_right = 9.0
+margin_bottom = 10.93
+rect_scale = Vector2( 0.3, 0.3 )
+theme = ExtResource( 3 )
+text = "x"
+
+[node name="item" type="TextureRect" parent="stats"]
+modulate = Color( 0.615686, 0.615686, 0.615686, 1 )
+anchor_left = 0.625
+anchor_top = 0.724
+anchor_right = 0.8
+anchor_bottom = 0.931
+margin_top = 0.00399971
+margin_bottom = 0.000997543
+texture = ExtResource( 5 )
+expand = true
+
+[node name="info" type="Label" parent="stats/item"]
+anchor_left = 0.025
+anchor_right = 1.0
+anchor_bottom = 1.614
+margin_left = 5.825
+margin_top = 4.0
+margin_right = 9.0
+margin_bottom = 10.93
+rect_scale = Vector2( 0.3, 0.3 )
+theme = ExtResource( 3 )
+text = "c"

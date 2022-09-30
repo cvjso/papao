@@ -1,6 +1,7 @@
 extends Node2D
 
 export var stamina = 3
+export var vision = 3
 
 # deve se ir de 4 em 4 no y
 # 8 em 8 no x
@@ -8,15 +9,17 @@ export var stamina = 3
 
 var area_node = preload("res://scenes/player area.tscn")
 onready var p_sprite = $"player sprite"
+onready var light = $Light2D
 
 var mouse_on = false
 var area_on = false
 
 func _ready():
-	pass
+	light.texture_scale = vision + 1
 
 func move_player(pos:Vector2):
-	position = pos
+	var TW = create_tween()
+	TW.tween_property(self, "position", pos, 0.5)
 	clean_area()
 
 func add_area(pos:Vector2, target:Node2D):
@@ -34,10 +37,10 @@ func clean_area():
 		n.queue_free()
 
 func show_area():
+	clean_area()
 	area_on = true
 	var distance = 1
 	var area_target = Node2D.new()
-	clean_area()
 	p_sprite.add_child(area_target)
 	for i in range(stamina):
 		# downs
@@ -59,3 +62,4 @@ func _input(event):
 		clean_area()
 	elif event.is_action_pressed("click") and mouse_on and not area_on:
 		show_area()
+		Globals.player = self
