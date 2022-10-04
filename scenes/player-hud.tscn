@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://sprites/char pict.png" type="Texture" id=1]
-[ext_resource path="res://sprites/lain pfp.jpg" type="Texture" id=2]
+[ext_resource path="res://icon.png" type="Texture" id=2]
 [ext_resource path="res://scenes/hud theme.tres" type="Theme" id=3]
 [ext_resource path="res://sprites/hud stats.png" type="Texture" id=4]
 [ext_resource path="res://sprites/none icon.png" type="Texture" id=5]

@@ -35,7 +35,6 @@ func is_path_available(start:Vector2, end:Vector2):
 			y_diff += 1
 		if y_diff > 0:
 			y_diff -= 1
-	
 	return true
 
 func move_player(pos:Vector2):
