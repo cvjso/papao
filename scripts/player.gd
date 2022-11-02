@@ -2,6 +2,7 @@ extends Node2D
 
 export var stamina = 3
 export var vision = 3
+export var life = 2
 
 # deve se ir de 4 em 4 no y
 # 8 em 8 no x
