@@ -3,7 +3,7 @@ extends Node
 
 # camera
 var camera := Camera2D.new()
-var zoom_value = 1.0
+var zoom_value = 1.7
 var speed = 10
 var offset = Vector2(0,50)
 
@@ -42,8 +42,6 @@ func move_player(pos:Vector2):
 	var n_pos = map.get_node("TileMap").world_to_map(pos)
 	var p_pos = map.get_node("TileMap").world_to_map(player.global_position)
 	if n_pos.x < len(matrix) and n_pos.x >= 0 and n_pos.y >= 0 and n_pos.y < len(matrix) and is_path_available(p_pos, n_pos):
-		
-		#player = get_tree().current_scene.find_node("player")
 		player.move_player(pos)
 		return true
 	return false
@@ -52,6 +50,8 @@ func _ready():
 	get_tree().current_scene.add_child(camera)
 	camera.current = true
 	camera.offset = offset
+	camera.zoom.x = zoom_value
+	camera.zoom.y = zoom_value
 
 func zoom_in():
 	zoom_value += 0.1

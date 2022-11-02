@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/map.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/pistol overworld.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/boitata.tscn" type="PackedScene" id=4]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -24,18 +25,22 @@ shader = SubResource( 1 )
 
 [node name="map" parent="." instance=ExtResource( 2 )]
 grid_size = 16
+proportion = [ 10, 0, 0 ]
 
 [node name="player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 16, 13 )
 stamina = 3
 
 [node name="player2" parent="." instance=ExtResource( 1 )]
-position = Vector2( -32, 96 )
+position = Vector2( -16, 13 )
 stamina = 3
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color( 0.278431, 0.278431, 0.278431, 1 )
 
 [node name="pistol overworld" parent="." instance=ExtResource( 3 )]
 material = SubResource( 2 )
 position = Vector2( 64, 112 )
 scale = Vector2( 2, 2 )
+
+[node name="boitata" parent="." instance=ExtResource( 4 )]
+position = Vector2( -9, 80 )

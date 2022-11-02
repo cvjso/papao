@@ -8,18 +8,22 @@ export var vision = 3
 # quando colocado em y negativo deve-se marcar show behind parent
 
 var area_node = preload("res://scenes/player area.tscn")
-onready var p_sprite = $"player sprite"
+onready var p_sprite = $"area spawn"
 onready var light = $Light2D
 
 var mouse_on = false
 var area_on = false
+
+var base_dist = 16
+var padding_y := 0
+var padding_x := 0
 
 func _ready():
 	light.texture_scale = vision + 1
 
 func move_player(pos:Vector2):
 	var TW = create_tween()
-	TW.tween_property(self, "position", pos, 0.5)
+	TW.tween_property(self, "global_position", pos, 0.5)
 	clean_area()
 
 func add_area(pos:Vector2, target:Node2D):
@@ -44,11 +48,11 @@ func show_area():
 	p_sprite.add_child(area_target)
 	for i in range(stamina):
 		# downs
-		add_area(Vector2(-8 * distance, 4 * distance), p_sprite)
-		add_area(Vector2(8 * distance, 4 * distance), p_sprite)
+		add_area(Vector2(-base_dist * distance + padding_x, base_dist/2 * distance + padding_y), p_sprite)
+		add_area(Vector2(base_dist * distance + padding_x, base_dist/2 * distance + padding_y), p_sprite)
 		# ups
-		add_area(Vector2(-8 * distance, -4 * distance), p_sprite)
-		add_area(Vector2(8 * distance, -4 * distance), p_sprite)
+		add_area(Vector2(-base_dist * distance, -base_dist/2 * distance), p_sprite)
+		add_area(Vector2(base_dist * distance, -base_dist/2 * distance), p_sprite)
 		distance += 1
 
 func _on_Area2D_mouse_entered():
