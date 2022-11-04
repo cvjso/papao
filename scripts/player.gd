@@ -2,6 +2,7 @@ extends Node2D
 
 export var stamina = 3
 export var vision = 3
+export var life = 2
 export var damage = 2
 export var range_weapon = 4
 
