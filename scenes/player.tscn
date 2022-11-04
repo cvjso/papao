@@ -1,8 +1,129 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://sprites/sprite dudu.png" type="Texture" id=1]
+[ext_resource path="res://sprites/walk dudu.png" type="Texture" id=1]
 [ext_resource path="res://scripts/player.gd" type="Script" id=2]
 [ext_resource path="res://sprites/lait.png" type="Texture" id=3]
+[ext_resource path="res://sprites/idle dudu.png" type="Texture" id=4]
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("player sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("player sprite:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ ExtResource( 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("player sprite:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 6 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "idle"
+length = 2.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("player sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 4 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("player sprite:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 8 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("player sprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6, 0.9, 1.2, 1.5, 1.8, 2.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "walk"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("player sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("player sprite:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("player sprite:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 6 ]
+}
 
 [node name="player" type="Node2D"]
 script = ExtResource( 2 )
@@ -11,8 +132,7 @@ stamina = 1
 [node name="player sprite" type="Sprite" parent="."]
 position = Vector2( 0, -12 )
 texture = ExtResource( 1 )
-hframes = 4
-frame = 2
+hframes = 6
 
 [node name="Area2D" type="Area2D" parent="player sprite"]
 
@@ -28,6 +148,12 @@ shadow_enabled = true
 shadow_item_cull_mask = 3
 
 [node name="area spawn" type="Position2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "idle"
+anims/RESET = SubResource( 1 )
+anims/idle = SubResource( 3 )
+anims/walk = SubResource( 2 )
 
 [connection signal="mouse_entered" from="player sprite/Area2D" to="." method="_on_Area2D_mouse_entered"]
 [connection signal="mouse_exited" from="player sprite/Area2D" to="." method="_on_Area2D_mouse_exited"]

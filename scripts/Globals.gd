@@ -14,7 +14,49 @@ var map
 var player
 
 func is_tile_available(pos:Vector2):
-	return !matrix[pos.x][pos.y] == 2
+	if pos.x < len(matrix) and pos.y < len(matrix):
+		return not matrix[pos.x][pos.y] == 2
+	return false
+
+func get_random_tile():
+	var n = len(matrix)
+	var x = randi() % n
+	var y = randi() % n
+	if is_tile_available(Vector2(x,y)):
+		return Vector2(x,y)
+	else:
+		return get_random_tile()
+
+
+#	0	0	0
+#	0	0	0
+#	0	0	0
+#	0	0	0
+#	0	0	0
+#	0	0	0
+#	0	0	0
+
+func populate_snake():
+	var curr = get_random_tile()
+	matrix[curr.x][curr.y] = 2
+	return curr
+
+func get_map_to_world_pos(pos:Vector2):
+	map = get_tree().current_scene.find_node("map")
+	return map.get_node("TileMap").map_to_world(pos)
+
+# [
+#	1,1,	-> 32,13
+#	1,2,
+#	1,3,
+#	1,4
+# ]
+
+func move_snake(pos:Vector2):
+	var chosen = get_random_tile()
+	matrix[pos.x][pos.y] = 0
+	matrix[chosen.x][chosen.y] = 2
+	return chosen
 
 func is_path_available(start:Vector2, end:Vector2):
 	var x_diff = end.x - start.x
