@@ -1,0 +1,124 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://sprites/HUD/tela inicial/LOGO-export.png" type="Texture" id=1]
+[ext_resource path="res://sprites/HUD/tela inicial/bot╞o iniciar.png" type="Texture" id=2]
+[ext_resource path="res://sprites/HUD/tela inicial/bg tela inicial FOLHAS.png" type="Texture" id=3]
+[ext_resource path="res://sprites/HUD/tela inicial/bg tela inicial ESTRELAS2.png" type="Texture" id=4]
+[ext_resource path="res://sprites/HUD/tela inicial/bg tela inicial ESTRELAS3.png" type="Texture" id=5]
+[ext_resource path="res://sprites/HUD/tela inicial/bg tela inicia NUVENSl.png" type="Texture" id=6]
+[ext_resource path="res://sprites/HUD/tela inicial/bg tela inicial ESTRELAS1.png" type="Texture" id=7]
+[ext_resource path="res://scripts/animação tela inicial.gd" type="Script" id=8]
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+
+[sub_resource type="Animation" id=2]
+resource_name = "estrelas"
+length = 20.0
+loop = true
+step = 1.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("BgTelaInicialEstrelas1:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.48, 0.98, 1.52, 1.99, 2.49, 2.99, 3.52, 3.99, 4.48, 5.02, 5.5, 5.98, 6.5, 7.01, 7.51, 8.01, 8.51, 9.01, 9.48, 10, 10.4954, 11.0054, 11.5154, 12.0054, 12.5054, 13.0154, 13.4954, 14.0154, 14.5054, 14.9985, 15.5, 16.0185, 16.5185, 17.0085, 17.5085, 18.0185, 18.4985, 19.0185, 19.5185, 20 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 7 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 7 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 7 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 7 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 7 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 7 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 7 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 7 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 7 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 7 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 7 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 7 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 7 ), ExtResource( 4 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("nuvem3:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 20 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 256, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("nuvem1:rect_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 20 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -256, 0 ), Vector2( 0, 0 ) ]
+}
+
+[node name="Node2D" type="CanvasLayer"]
+script = ExtResource( 8 )
+
+[node name="Sprite" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="BgTelaInicialEstrelas1" type="TextureRect" parent="Sprite"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 7 )
+expand = true
+
+[node name="nuvem1" type="TextureRect" parent="Sprite"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -256.0
+margin_right = -256.0
+texture = ExtResource( 6 )
+expand = true
+
+[node name="nuvem3" type="TextureRect" parent="Sprite"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -0.00793457
+texture = ExtResource( 6 )
+expand = true
+
+[node name="BgTelaInicialEstrelas2" type="TextureRect" parent="Sprite"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 3 )
+expand = true
+
+[node name="Logo-export" type="TextureRect" parent="Sprite/BgTelaInicialEstrelas2"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -105.0
+margin_top = -80.0
+margin_right = 105.0
+margin_bottom = 217.0
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 5
+
+[node name="BotãoIniciar" type="TextureRect" parent="Sprite"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -36.0
+margin_top = -45.0
+margin_right = 36.0
+margin_bottom = -30.0
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprite")
+autoplay = "estrelas"
+anims/RESET = SubResource( 1 )
+anims/estrelas = SubResource( 2 )
+
+[connection signal="mouse_entered" from="Sprite/BotãoIniciar" to="." method="_on_BotoIniciar_mouse_entered"]
+[connection signal="mouse_exited" from="Sprite/BotãoIniciar" to="." method="_on_BotoIniciar_mouse_exited"]

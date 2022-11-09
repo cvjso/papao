@@ -13,10 +13,21 @@ var player_pos = Vector2(0,0)
 var map
 var player
 
+# transition
+var transition = preload("res://scenes/transition.tscn").instance()
+
 func is_tile_available(pos:Vector2):
 	if pos.x < len(matrix) and pos.y < len(matrix):
 		return not matrix[pos.x][pos.y] == 2
 	return false
+
+func change_scene(path):
+	var anim = transition.get_node("AnimationPlayer")
+	anim.play("start")
+	yield(anim, "animation_finished")
+	get_tree().change_scene(path)
+	anim.play_backwards("start")
+	yield(anim, "animation_finished")
 
 func get_random_tile():
 	var n = len(matrix)
@@ -85,11 +96,16 @@ func move_player(pos:Vector2):
 	var p_pos = map.get_node("TileMap").world_to_map(player.global_position)
 	if n_pos.x < len(matrix) and n_pos.x >= 0 and n_pos.y >= 0 and n_pos.y < len(matrix) and is_path_available(p_pos, n_pos):
 		player.move_player(pos)
+		matrix[p_pos.x][p_pos.y] = 0
+		matrix[n_pos.x][n_pos.y] = 2
 		return true
 	return false
 
 func _ready():
-	get_tree().current_scene.add_child(camera)
+	add_child(transition)
+	add_child(camera)
+	#get_tree().current_scene.add_child(camera)
+	#get_tree().current_scene.add_child(transition)
 	camera.current = true
 	camera.offset = offset
 	camera.zoom.x = zoom_value
@@ -133,5 +149,3 @@ func _input(event):
 	handle_move(event)
 	handle_zoom(event)
 	handle_quit(event)
-	
-	

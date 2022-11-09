@@ -30,6 +30,12 @@ func move_player(pos:Vector2):
 	anim.play("idle")
 	clean_area()
 
+func take_damage(value):
+	life -= value
+	anim.play("damage")
+	yield(anim, "animation_finished")
+	anim.play("idle")
+
 func add_area(pos:Vector2, target:Node2D, area_n):
 	var area_inst = area_n.instance()
 	target.add_child(area_inst)
