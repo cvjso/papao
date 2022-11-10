@@ -21,6 +21,9 @@ func _process(delta):
 	if get_node(enemies[0]) == null and !done:
 		done = true
 		Globals.change_scene("res://scenes/Vitoria.tscn")
+	if container.get_child_count() == 0 and !done:
+		done = true
+		Globals.change_scene("res://scenes/derrota.tscn")
 
 func _on_Button_pressed():
 	for i in range(len(players)):

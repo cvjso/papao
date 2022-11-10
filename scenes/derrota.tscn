@@ -69,6 +69,7 @@ volume_db = -10.0
 autoplay = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "idle"
 playback_speed = 0.5
 anims/RESET = SubResource( 2 )
 anims/idle = SubResource( 3 )

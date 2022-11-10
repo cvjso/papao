@@ -28,7 +28,7 @@ func move():
 
 func take_damage(value):
 	life -= value
-	anim.play("dano")
+	anim.play("damage")
 	yield(anim,"animation_finished")
 	anim.play("idle")
 	if life < 0:

@@ -11,5 +11,5 @@ dest_files=[ "res://.import/passos na grama.mp3-39c774f2b3255dfe48d25c03729f12bb
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0
