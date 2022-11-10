@@ -26,10 +26,6 @@ func move():
 	anim.play("idle")
 	emit_signal("moved")
 
-func _input(event):
-	if event.is_action_pressed("debug"):
-		turn()
-
 func take_damage(value):
 	life -= value
 	anim.play("dano")
