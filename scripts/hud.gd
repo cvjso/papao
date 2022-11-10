@@ -12,6 +12,8 @@ func _ready():
 		var t = player_hud.instance()
 		t.life = get_node(players[i]).life
 		t.stamina = get_node(players[i]).stamina
+		t.icon = get_node(players[i]).icon
+		t.nome = get_node(players[i]).nome
 		container.add_child(t)
 		get_node(players[i]).connect("taken_damage", t, "take_damage")
 		get_node(players[i]).connect("used_stamina", t, "use_stamina")

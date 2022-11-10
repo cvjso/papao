@@ -2,6 +2,8 @@ extends Control
 
 var stamina = 0
 var life = 0
+var icon:String = ""
+var nome
 
 var stamina_empty = preload("res://sprites/HUD/BURACO STAMINA HUD.png")
 var stamina_full = preload("res://sprites/HUD/STAMINA.png")
@@ -11,6 +13,8 @@ var life_full = preload("res://sprites/HUD/VIDA HUD.png")
 
 onready var stamina_box = $stats/stamina
 onready var life_box = $stats/life
+onready var iconImg = $TextureRect
+onready var nomeLabel = $Label
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -23,6 +27,10 @@ func _ready():
 		var t = TextureRect.new()
 		t.texture = life_full
 		life_box.add_child(t)
+	nomeLabel.text = nome
+	var t = TextureRect.new()
+	t.texture = load(icon)
+	iconImg.texture = t
 
 func dies():
 	queue_free()

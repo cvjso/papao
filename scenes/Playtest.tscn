@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/boitata.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/player.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://scenes/hud.tscn" type="PackedScene" id=5]
 [ext_resource path="res://SOM/MUSICA/m2.mp3" type="AudioStream" id=6]
 [ext_resource path="res://SOM/SOUND EFFECTS/ambiente.mp3" type="AudioStream" id=7]
+[ext_resource path="res://scenes/player clara.tscn" type="PackedScene" id=8]
 
 [node name="Playtest" type="Node2D"]
 
@@ -33,10 +34,22 @@ grid_size = 16
 
 [node name="player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 0, 5 )
+stamina = 5
+life = 3
+damage = 3
+range_weapon = 2
+icon = "res://sprites/HUD/PORTRAIT DUDU + HUD.png"
+nome = "DUDU"
 
-[node name="player2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 16, 14 )
+[node name="player2" parent="." instance=ExtResource( 8 )]
+position = Vector2( 16, 13 )
 stamina = 4
+vision = 14
+life = 3
+damage = 1
+range_weapon = 6
+icon = "res://sprites/HUD/PORTRAIT CLARA + HUD.png"
+nome = "CLARA"
 
 [node name="boitata" parent="." instance=ExtResource( 1 )]
 position = Vector2( 64, 80 )
@@ -47,7 +60,7 @@ enemies = [ NodePath("../boitata") ]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
-volume_db = -10.0
+volume_db = -12.0
 autoplay = true
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]

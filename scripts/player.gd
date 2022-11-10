@@ -5,6 +5,8 @@ export var vision = 3
 export var life = 2
 export var damage = 2
 export var range_weapon = 4
+export var icon:String
+export var nome:String
 
 onready var max_stamina = stamina
 
@@ -38,6 +40,13 @@ func move_player(pos:Vector2):
 	stamina -= 1
 	emit_signal("used_stamina")
 
+func attack():
+	anim.play("attack")
+	yield(anim, "animation_finished")
+	anim.play("idle")
+	stamina -= 1
+	emit_signal("used_stamina")
+
 func take_damage(value):
 	life -= value
 	anim.play("damage")
@@ -49,9 +58,12 @@ func take_damage(value):
 		visible = false
 		#queue_free()
 
-func add_area(pos:Vector2, target:Node2D, area_n):
+func add_area(pos:Vector2, target:Node2D, area_n, dam):
 	var area_inst = area_n.instance()
 	target.add_child(area_inst)
+	if dam:
+		area_inst.damage = damage
+		area_inst.connect("spoted", self, "attack")
 	area_inst.position = pos
 	if pos.y < 0:
 		area_inst.show_behind_parent = true
@@ -75,11 +87,11 @@ func show_area():
 	p_sprite.add_child(area_target)
 	for i in range(stamina):
 		# downs
-		add_area(Vector2(-base_dist * distance + padding_x, base_dist/2 * distance + padding_y), p_sprite, area_node)
-		add_area(Vector2(base_dist * distance + padding_x, base_dist/2 * distance + padding_y), p_sprite, area_node)
+		add_area(Vector2(-base_dist * distance + padding_x, base_dist/2 * distance + padding_y), p_sprite, area_node, false)
+		add_area(Vector2(base_dist * distance + padding_x, base_dist/2 * distance + padding_y), p_sprite, area_node, false)
 		# ups
-		add_area(Vector2(-base_dist * distance, -base_dist/2 * distance), p_sprite, area_node)
-		add_area(Vector2(base_dist * distance, -base_dist/2 * distance), p_sprite, area_node)
+		add_area(Vector2(-base_dist * distance, -base_dist/2 * distance), p_sprite, area_node, false)
+		add_area(Vector2(base_dist * distance, -base_dist/2 * distance), p_sprite, area_node, false)
 		distance += 1
 
 func show_damage_area():
@@ -87,13 +99,13 @@ func show_damage_area():
 	var distance = 1
 	var area_target = Node2D.new()
 	p_sprite.add_child(area_target)
-	for i in range(stamina):
+	for i in range(range_weapon):
 		# downs
-		add_area(Vector2(-base_dist * distance + padding_x, base_dist/2 * distance + padding_y), p_sprite, damage_area)
-		add_area(Vector2(base_dist * distance + padding_x, base_dist/2 * distance + padding_y), p_sprite, damage_area)
+		add_area(Vector2(-base_dist * distance + padding_x, base_dist/2 * distance + padding_y), p_sprite, damage_area, true)
+		add_area(Vector2(base_dist * distance + padding_x, base_dist/2 * distance + padding_y), p_sprite, damage_area, true)
 		# ups
-		add_area(Vector2(-base_dist * distance, -base_dist/2 * distance), p_sprite, damage_area)
-		add_area(Vector2(base_dist * distance, -base_dist/2 * distance), p_sprite, damage_area)
+		add_area(Vector2(-base_dist * distance, -base_dist/2 * distance), p_sprite, damage_area, true)
+		add_area(Vector2(base_dist * distance, -base_dist/2 * distance), p_sprite, damage_area, true)
 		distance += 1
 
 func _on_Area2D_mouse_entered():
@@ -103,7 +115,7 @@ func _on_Area2D_mouse_exited():
 	mouse_on = false
 
 func _input(event):
-	if event.is_action_pressed("weapon"):
+	if event.is_action_pressed("weapon") and stamina > 0:
 		clean_area()
 		show_damage_area()
 	if event.is_action_pressed("click") and area_on:

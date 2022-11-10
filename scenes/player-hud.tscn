@@ -21,22 +21,22 @@ expand = true
 [node name="stats" type="TextureRect" parent="."]
 margin_left = 25.0
 margin_top = 1.0
-margin_right = 87.0
-margin_bottom = 28.0
+margin_right = 111.0
+margin_bottom = 32.0
 texture = ExtResource( 2 )
 expand = true
 
 [node name="life" type="HBoxContainer" parent="stats"]
-margin_left = 16.0
-margin_top = 3.0
-margin_right = 59.0
-margin_bottom = 10.0
+margin_left = 22.0
+margin_top = 5.0
+margin_right = 65.0
+margin_bottom = 12.0
 
 [node name="stamina" type="HBoxContainer" parent="stats"]
-margin_left = 15.0
-margin_top = 12.0
-margin_right = 58.0
-margin_bottom = 19.0
+margin_left = 21.0
+margin_top = 15.0
+margin_right = 64.0
+margin_bottom = 22.0
 
 [node name="Label" type="Label" parent="."]
 margin_top = 21.0
