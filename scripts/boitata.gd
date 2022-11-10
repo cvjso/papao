@@ -32,6 +32,9 @@ func _input(event):
 
 func take_damage(value):
 	life -= value
+	anim.play("dano")
+	yield(anim,"animation_finished")
+	anim.play("idle")
 	if life < 0:
 		self.queue_free()
 
@@ -47,7 +50,8 @@ func attack(player, invert):
 	anim.play("attack")
 	if invert == "back":
 		$cabeca.scale.x = -1
-	player.take_damage(damage)
+	if player != null:
+		player.take_damage(damage)
 	yield(anim, "animation_finished")
 	anim.play("RESET")
 	yield(anim, "animation_finished")

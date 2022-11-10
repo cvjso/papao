@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/fogo 2.mp3-24da6ff70b13d405a30a5996e7c3a627.mp3str"
+
+[deps]
+
+source_file="res://SOM/SOUND EFFECTS/fogo 2.mp3"
+dest_files=[ "res://.import/fogo 2.mp3-24da6ff70b13d405a30a5996e7c3a627.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -7,7 +7,7 @@ func _ready():
 
 func _input(event):
 	if event.is_action_pressed("click") and mouse_on:
-		Globals.change_scene("res://scenes/Playtest.tscn")
+		Globals.change_scene("res://scenes/controles.tscn")
 
 func _on_BotoIniciar_mouse_entered():
 	mouse_on = true

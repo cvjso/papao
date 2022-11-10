@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/cobra ataque - corte.mp3-0136fa7eca010b80109a74d4b772c31b.mp3str"
+
+[deps]
+
+source_file="res://SOM/SOUND EFFECTS/cobra ataque - corte.mp3"
+dest_files=[ "res://.import/cobra ataque - corte.mp3-0136fa7eca010b80109a74d4b772c31b.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

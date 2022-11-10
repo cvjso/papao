@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/cobra 2.mp3-a866137ac9711db6b485f0c1ad5329ab.mp3str"
+
+[deps]
+
+source_file="res://SOM/SOUND EFFECTS/cobra 2.mp3"
+dest_files=[ "res://.import/cobra 2.mp3-a866137ac9711db6b485f0c1ad5329ab.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

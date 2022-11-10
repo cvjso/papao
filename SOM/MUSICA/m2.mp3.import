@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/m2.mp3-7e5907a772020681a49f16b2baa80c55.mp3str"
+
+[deps]
+
+source_file="res://SOM/MUSICA/m2.mp3"
+dest_files=[ "res://.import/m2.mp3-7e5907a772020681a49f16b2baa80c55.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -6,6 +6,8 @@ export var life = 2
 export var damage = 2
 export var range_weapon = 4
 
+onready var max_stamina = stamina
+
 var area_node = preload("res://scenes/player area.tscn")
 var damage_area = preload("res://scenes/damage area.tscn")
 onready var p_sprite = $"area spawn"
@@ -19,6 +21,10 @@ var base_dist = 16
 var padding_y := 0
 var padding_x := 0
 
+signal taken_damage
+signal used_stamina
+signal dead
+
 func _ready():
 	light.texture_scale = vision + 1
 
@@ -29,12 +35,19 @@ func move_player(pos:Vector2):
 	yield(anim, "animation_finished")
 	anim.play("idle")
 	clean_area()
+	stamina -= 1
+	emit_signal("used_stamina")
 
 func take_damage(value):
 	life -= value
 	anim.play("damage")
 	yield(anim, "animation_finished")
 	anim.play("idle")
+	emit_signal("taken_damage")
+	if life <= 0:
+		emit_signal("dead")
+		visible = false
+		#queue_free()
 
 func add_area(pos:Vector2, target:Node2D, area_n):
 	var area_inst = area_n.instance()
@@ -49,6 +62,10 @@ func clean_area():
 		var n = p_sprite.get_child(0)
 		p_sprite.remove_child(n)
 		n.queue_free()
+
+func die():
+	emit_signal("dead")
+	queue_free()
 
 func show_area():
 	clean_area()

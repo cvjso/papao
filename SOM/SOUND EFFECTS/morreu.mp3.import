@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/morreu.mp3-2f16effeb10a71bcf7ba241a1b32398f.mp3str"
+
+[deps]
+
+source_file="res://SOM/SOUND EFFECTS/morreu.mp3"
+dest_files=[ "res://.import/morreu.mp3-2f16effeb10a71bcf7ba241a1b32398f.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

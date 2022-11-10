@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/susto.mp3-d8fc95c4a3b6e5ee7d3b71ba661e5b36.mp3str"
+
+[deps]
+
+source_file="res://SOM/SOUND EFFECTS/susto.mp3"
+dest_files=[ "res://.import/susto.mp3-d8fc95c4a3b6e5ee7d3b71ba661e5b36.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

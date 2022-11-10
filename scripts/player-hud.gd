@@ -23,7 +23,31 @@ func _ready():
 		var t = TextureRect.new()
 		t.texture = life_full
 		life_box.add_child(t)
-	pass # Replace with function body.
+
+func dies():
+	queue_free()
+
+func take_damage():
+	var last = life_box.get_child(0)
+	life_box.remove_child(last)
+	var t = TextureRect.new()
+	t.texture = life_empty
+	life_box.add_child(t)
+
+func use_stamina():
+	var last = stamina_box.get_child(0)
+	stamina_box.remove_child(last)
+	var t = TextureRect.new()
+	t.texture = stamina_empty
+	stamina_box.add_child(t)
+
+func refill_stamina():
+	for i in stamina_box.get_children():
+		stamina_box.remove_child(i)
+	for i in range(stamina):
+		var t = TextureRect.new()
+		t.texture = stamina_full
+		stamina_box.add_child(t)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

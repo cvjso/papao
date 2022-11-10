@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/passos na grama.mp3-39c774f2b3255dfe48d25c03729f12bb.mp3str"
+
+[deps]
+
+source_file="res://SOM/SOUND EFFECTS/passos na grama.mp3"
+dest_files=[ "res://.import/passos na grama.mp3-39c774f2b3255dfe48d25c03729f12bb.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

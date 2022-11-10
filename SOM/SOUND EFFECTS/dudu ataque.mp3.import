@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/dudu ataque.mp3-641473b83e728ff950b62b430b58ae65.mp3str"
+
+[deps]
+
+source_file="res://SOM/SOUND EFFECTS/dudu ataque.mp3"
+dest_files=[ "res://.import/dudu ataque.mp3-641473b83e728ff950b62b430b58ae65.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

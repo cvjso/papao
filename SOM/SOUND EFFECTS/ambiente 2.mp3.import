@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/ambiente 2.mp3-48242c8cf01203956d1dc96391ccfe2d.mp3str"
+
+[deps]
+
+source_file="res://SOM/SOUND EFFECTS/ambiente 2.mp3"
+dest_files=[ "res://.import/ambiente 2.mp3-48242c8cf01203956d1dc96391ccfe2d.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

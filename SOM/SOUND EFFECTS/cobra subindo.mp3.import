@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/cobra subindo.mp3-f28db19fd6c3d11a6d7e2e9636c9a127.mp3str"
+
+[deps]
+
+source_file="res://SOM/SOUND EFFECTS/cobra subindo.mp3"
+dest_files=[ "res://.import/cobra subindo.mp3-f28db19fd6c3d11a6d7e2e9636c9a127.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

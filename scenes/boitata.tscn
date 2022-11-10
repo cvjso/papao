@@ -1,10 +1,13 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://sprites/boitata/cabeça subindo sprite sheet.png" type="Texture" id=1]
 [ext_resource path="res://sprites/cabeça 1 sprite sheet.png" type="Texture" id=2]
 [ext_resource path="res://sprites/boitata/cabeça ataque sprite sheet.png" type="Texture" id=3]
 [ext_resource path="res://scripts/boitata.gd" type="Script" id=4]
 [ext_resource path="res://sprites/boitata/fogo.png" type="Texture" id=5]
+[ext_resource path="res://sprites/Light.png" type="Texture" id=6]
+[ext_resource path="res://SOM/SOUND EFFECTS/cobra ataque - corte.mp3" type="AudioStream" id=7]
+[ext_resource path="res://SOM/SOUND EFFECTS/cobra subindo.mp3" type="AudioStream" id=8]
 
 [sub_resource type="Shader" id=6]
 code = "/* 
@@ -112,6 +115,59 @@ shader_param/scrolling_speed = 0.08
 shader_param/enable_palette_cycling = false
 shader_param/palette_speed = 0.1
 
+[sub_resource type="Shader" id=10]
+code = "/* 
+Earthbound battle backgrounds shader with scrolling effect and palette cycling like in the original game.
+@retr0_dev
+	
+Apply the shader to a TextureRect or a Sprite. Use a texture with some shapes in a transparent background for best results.
+You can then use a ColorRect or another method to paint the background.
+You can use the shader on multiple TextureRects and obtain a double-buffer effect tweaking the values for each one, remember to Make Unique the shader material.
+*/
+shader_type canvas_item;
+
+uniform float screen_height = 640.0;
+uniform float amplitude = 0.075;
+uniform float frequency = 10.0;
+uniform float speed = 2.0;
+uniform float amplitude_vertical = 0.0;
+uniform float frequency_vertical = 0.0;
+uniform float speed_vertical = 0.0;
+uniform vec2 scroll_direction = vec2(0.0, 0.0);
+uniform float scrolling_speed = 0.08;
+uniform bool enable_palette_cycling = false;
+uniform sampler2D palette;
+uniform float palette_speed = 0.1;
+
+void fragment()
+{
+	float diff_x = amplitude * sin((frequency * UV.y) + (speed * TIME));
+	float diff_y = amplitude_vertical * sin((frequency_vertical * UV.y)  + (speed_vertical * TIME));
+	vec2 scroll = scroll_direction * TIME * scrolling_speed;
+	vec4 tex = texture(TEXTURE, vec2(UV.x + diff_x, UV.y + diff_y) + scroll);
+	float palette_swap = mod(tex.r - TIME * palette_speed, 1.0);
+	
+	if (enable_palette_cycling)
+	{
+		COLOR = vec4(texture(palette, vec2(palette_swap, 0)).rgb, tex.a);
+	}
+	else COLOR = tex;
+}"
+
+[sub_resource type="ShaderMaterial" id=11]
+shader = SubResource( 10 )
+shader_param/screen_height = 640.0
+shader_param/amplitude = 0.075
+shader_param/frequency = 10.0
+shader_param/speed = 2.0
+shader_param/amplitude_vertical = 0.0
+shader_param/frequency_vertical = 0.0
+shader_param/speed_vertical = 0.0
+shader_param/scroll_direction = Vector2( 0, 0 )
+shader_param/scrolling_speed = 0.08
+shader_param/enable_palette_cycling = false
+shader_param/palette_speed = 0.1
+
 [sub_resource type="Animation" id=1]
 length = 0.001
 tracks/0/type = "value"
@@ -174,6 +230,54 @@ tracks/4/keys = {
 "update": 0,
 "values": [ Vector2( -36, -81 ) ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath("AudioStreamPlayer:autoplay")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("AudioStreamPlayer:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("cabeca:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("AudioStreamPlayer:stream")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ ExtResource( 7 ) ]
+}
 
 [sub_resource type="Animation" id=9]
 resource_name = "attack"
@@ -225,6 +329,81 @@ tracks/3/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector2( -82, -113 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AudioStreamPlayer:stream")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 7 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("AudioStreamPlayer:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "dano"
+tracks/0/type = "value"
+tracks/0/path = NodePath("cabeca:texture:load_path")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "res://.import/cabeça dano c overlay sprite sheet.png-7b3372f04ee73740a4994db027182167.stex" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("cabeca:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 5 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("cabeca:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("cabeca:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.5, 0.6, 0.7, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true, false, true ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -331,6 +510,30 @@ tracks/4/keys = {
 "update": 0,
 "values": [ Vector2( 1e-05, 1e-05 ), Vector2( 1, 1 ) ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath("AudioStreamPlayer:stream")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 8 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("AudioStreamPlayer:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
 
 [sub_resource type="Animation" id=8]
 resource_name = "teleport out"
@@ -395,6 +598,30 @@ tracks/4/keys = {
 "update": 0,
 "values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1e-05, 1e-05 ) ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath("AudioStreamPlayer:stream")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 8 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("AudioStreamPlayer:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( -0.1, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
 
 [node name="boitata" type="Node2D" groups=["enemy"]]
 script = ExtResource( 4 )
@@ -407,15 +634,33 @@ material = SubResource( 7 )
 position = Vector2( -12, -23 )
 texture = ExtResource( 5 )
 
+[node name="Light2D" type="Light2D" parent="fogos/Fogo3"]
+position = Vector2( -5, 3 )
+texture = ExtResource( 6 )
+texture_scale = 2.5
+mode = 2
+
 [node name="Fogo4" type="Sprite" parent="fogos"]
 material = SubResource( 7 )
 position = Vector2( -28, -7 )
 texture = ExtResource( 5 )
 
+[node name="Light2D" type="Light2D" parent="fogos/Fogo4"]
+position = Vector2( 2, -2 )
+texture = ExtResource( 6 )
+texture_scale = 2.5
+mode = 2
+
 [node name="Fogo6" type="Sprite" parent="fogos"]
 material = SubResource( 7 )
 position = Vector2( 17, -17 )
 texture = ExtResource( 5 )
+
+[node name="Light2D" type="Light2D" parent="fogos/Fogo6"]
+position = Vector2( 7.45, -0.549999 )
+texture = ExtResource( 6 )
+texture_scale = 2.5
+mode = 2
 
 [node name="Fogo" type="Sprite" parent="fogos"]
 material = SubResource( 7 )
@@ -423,17 +668,36 @@ position = Vector2( -19, 2 )
 z_index = 1
 texture = ExtResource( 5 )
 
+[node name="Light2D" type="Light2D" parent="fogos/Fogo"]
+position = Vector2( 0, 5 )
+texture = ExtResource( 6 )
+texture_scale = 2.5
+mode = 2
+
 [node name="Fogo2" type="Sprite" parent="fogos"]
 material = SubResource( 5 )
 position = Vector2( 4, 10 )
 z_index = 1
 texture = ExtResource( 5 )
 
+[node name="Light2D" type="Light2D" parent="fogos/Fogo2"]
+position = Vector2( -1, 3 )
+texture = ExtResource( 6 )
+texture_scale = 2.5
+mode = 2
+
 [node name="Fogo5" type="Sprite" parent="fogos"]
 material = SubResource( 7 )
 position = Vector2( 20, -6 )
 z_index = 1
 texture = ExtResource( 5 )
+
+[node name="Light2D" type="Light2D" parent="fogos/Fogo5"]
+material = SubResource( 11 )
+position = Vector2( 3.45, 4.45 )
+texture = ExtResource( 6 )
+texture_scale = 2.5
+mode = 2
 
 [node name="cabeca" type="Sprite" parent="."]
 texture = ExtResource( 2 )
@@ -445,17 +709,20 @@ hframes = 18
 autoplay = "idle"
 anims/RESET = SubResource( 1 )
 anims/attack = SubResource( 9 )
+anims/dano = SubResource( 12 )
 anims/idle = SubResource( 2 )
 anims/teleport = SubResource( 3 )
 "anims/teleport out" = SubResource( 8 )
 
 [node name="hitbox" type="Area2D" parent="." groups=["enemy"]]
+visible = false
 position = Vector2( 0, 4 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="hitbox"]
 polygon = PoolVector2Array( 0, 10, -15, 2, 0, -6, 15, 2 )
 
 [node name="damagebox" type="Area2D" parent="."]
+visible = false
 position = Vector2( 0, 4 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="damagebox"]
@@ -479,6 +746,7 @@ scale = Vector2( 0.6, 0.6 )
 polygon = PoolVector2Array( 2, 9, -13, 0, 0, -7, 16, 2 )
 
 [node name="damagebox2" type="Area2D" parent="."]
+visible = false
 position = Vector2( 0, 4 )
 
 [node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="damagebox2"]
@@ -500,6 +768,10 @@ polygon = PoolVector2Array( 0, 11, -16, 2, 0, -7, 16, 2 )
 position = Vector2( 16, 9 )
 scale = Vector2( 0.6, 0.6 )
 polygon = PoolVector2Array( 0, 11, -16, 2, 0, -7, 16, 2 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+volume_db = -15.0
 
 [connection signal="area_entered" from="damagebox" to="." method="_on_damagebox_area_entered" binds= [ "front" ]]
 [connection signal="area_entered" from="damagebox2" to="." method="_on_damagebox_area_entered" binds= [ "back" ]]

@@ -21,6 +21,7 @@ func populate():
 
 func render_world():
 	tilemap.clear()
+	Globals.matrix = []
 	var prop = proportion.duplicate()
 	for i in range(len(proportion)):
 		var s = grid_size * grid_size * prop[i]
