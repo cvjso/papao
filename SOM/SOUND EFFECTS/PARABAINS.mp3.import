@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/PARABAINS.mp3-dc5dc5e3a4c249cdba3d4cc439b05346.mp3str"
+
+[deps]
+
+source_file="res://SOM/SOUND EFFECTS/PARABAINS.mp3"
+dest_files=[ "res://.import/PARABAINS.mp3-dc5dc5e3a4c249cdba3d4cc439b05346.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
